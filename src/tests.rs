@@ -604,6 +604,17 @@ fn valueless_attribute() {
 }
 
 #[test]
+fn valueless_attribute_next_attribute() {
+    // https://github.com/y21/tl/issues/70
+    let input = r#"<button disabled id="btn">click</button>"#;
+
+    let dom = parse(input, ParserOptions::default()).unwrap();
+    let element = dom.get_element_by_id("btn");
+
+    assert!(element.is_some());
+}
+
+#[test]
 fn unquoted() {
     // https://github.com/y21/tl/issues/12
     let input = r#"

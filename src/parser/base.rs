@@ -154,6 +154,8 @@ impl<'a> Parser<'a> {
 
         let has_value = self.stream.expect_and_skip_cond(b'=');
         if !has_value {
+            // Stepback to the previous position to allow the parser to advance.
+            self.stream.retreat();
             return Some((name, None));
         }
 
